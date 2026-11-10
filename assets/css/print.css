@@ -1,0 +1,22 @@
+/* Print: a clean specification sheet or legal document on white paper. */
+@page { margin: 16mm 14mm; }
+html, body { background: #fff !important; color: #000 !important; }
+.header, .drawer, .subnav, .footer__motto, .footer__marks, .footer__grid, .to-top, .footer__links, .scrollbar, .actionbar, .intro,
+.series__index, .series__bar, .studio__ctrl, .gallery, .lightbox, .viewer, video, .video-toggle, .scroll-cue, .btns, .btn, .range__nav, .range__bar, .marquee, .next, .legal__toc, .skip-link, .film-wrap, .reel { display: none !important; }
+*, *::before, *::after { animation: none !important; transition: none !important; }
+.js .reveal, .js .reveal-media > img, .js .split-words .w > span, .manifesto__text .word { opacity: 1 !important; transform: none !important; clip-path: none !important; }
+.section, .showcase, .hero, .footer { background: #fff !important; color: #000 !important; padding-block: 8mm !important; min-height: 0 !important; }
+.section *, .footer *, .hero__content * { color: #000 !important; border-color: #bbb !important; }
+.hero { position: static !important; height: auto !important; }
+.hero__media { position: static !important; max-height: 90mm; overflow: hidden; }
+.hero__content { position: static !important; padding-top: 6mm !important; }
+.hero__logo img, .mark img, .footer__wordmark svg { filter: invert(1) !important; }
+.footer__wordmark svg { filter: none !important; color: #000 !important; width: 40mm !important; }
+figure, .stat, .specs details, tr, .legal__body section { break-inside: avoid; }
+h1, h2, h3 { break-after: avoid; }
+.masonry { column-count: 3 !important; }
+.showcase__panel[hidden] { display: none !important; }
+a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 9pt; word-break: break-all; }
+.legal__grid { display: block !important; }
+.todo { border: 1px dashed #000; }
+.series { height: auto !important; } .series__pin { position: static !important; height: auto !important; } .series__slides { position: relative !important; height: 80mm; } .series__panel { position: static !important; opacity: 1 !important; visibility: visible !important; transform: none !important; margin-top: 6mm; color: #000; }
