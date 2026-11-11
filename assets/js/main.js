@@ -166,7 +166,7 @@
     // A measured slow downlink gets the lighter cut of the same film.
     var c = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
     var liteSrc = v.getAttribute(usePortrait ? 'data-src-portrait-lite' : 'data-src-lite');
-    if (liteSrc && c && ((c.downlink && c.downlink < 5) || /(^|-)(2g|3g)$/.test(c.effectiveType || ''))) src = liteSrc;
+    if (liteSrc && c && ((c.downlink && c.downlink < 1.5) || /(^|-)(2g|3g)$/.test(c.effectiveType || ''))) src = liteSrc;
     if (usePortrait && v.getAttribute('data-poster-portrait')) v.poster = v.getAttribute('data-poster-portrait');
     if (src && v.getAttribute('src') !== src) { v.src = src; }
   }
@@ -208,12 +208,15 @@
   /* ---------- Range carousel ---------- */
   $$('[data-range]').forEach(function (root) {
     var track = $('.range__track', root);
-    var cards = $$('.model-card', track);
+    var cards = Array.prototype.slice.call(track.children);
     var prev = $('.prev', root), next = $('.next', root), count = $('.range__count', root), bar = $('.range__bar i', root);
+    // the scroll position at which card i sits in the middle of the track
+    function atStart() { return (getComputedStyle(cards[0]).scrollSnapAlign || '').indexOf('start') > -1; }
+    function centre(i) { var c = cards[i]; return atStart() ? c.offsetLeft - cards[0].offsetLeft : c.offsetLeft - (track.clientWidth - c.offsetWidth) / 2; }
     function idx() {
-      var l = track.scrollLeft, best = 0, bd = 1e9;
-      if (l + track.clientWidth >= track.scrollWidth - 4) return cards.length - 1;
-      cards.forEach(function (c, i) { var dd = Math.abs(c.offsetLeft - cards[0].offsetLeft - l); if (dd < bd) { bd = dd; best = i; } });
+      if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 4) return cards.length - 1;
+      var best = 0, bd = 1e9;
+      cards.forEach(function (c, i) { var dd = Math.abs(centre(i) - track.scrollLeft); if (dd < bd) { bd = dd; best = i; } });
       return best;
     }
     function upd() {
@@ -223,7 +226,7 @@
       if (prev) prev.disabled = i === 0;
       if (next) next.disabled = i === cards.length - 1;
     }
-    function go(d) { var i = Math.max(0, Math.min(cards.length - 1, idx() + d)); track.scrollTo({ left: cards[i].offsetLeft - cards[0].offsetLeft, behavior: reduced ? 'auto' : 'smooth' }); }
+    function go(d) { var i = Math.max(0, Math.min(cards.length - 1, idx() + d)); track.scrollTo({ left: centre(i), behavior: reduced ? 'auto' : 'smooth' }); }
     prev && prev.addEventListener('click', function () { go(-1); });
     next && next.addEventListener('click', function () { go(1); });
     track.addEventListener('scroll', function () { requestAnimationFrame(upd); }, { passive: true });
@@ -232,7 +235,7 @@
     var down = false, sx = 0, sl = 0, moved = false;
     track.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse') return; down = true; moved = false; sx = e.clientX; sl = track.scrollLeft; track.style.scrollSnapType = 'none'; });
     window.addEventListener('pointermove', function (e) { if (!down) return; var dx = e.clientX - sx; if (Math.abs(dx) > 5) moved = true; track.scrollLeft = sl - dx; });
-    window.addEventListener('pointerup', function () { if (!down) return; down = false; track.style.scrollSnapType = ''; if (moved) { var i = idx(); track.scrollTo({ left: cards[i].offsetLeft - cards[0].offsetLeft, behavior: 'smooth' }); } });
+    window.addEventListener('pointerup', function () { if (!down) return; down = false; track.style.scrollSnapType = ''; if (moved) { var i = idx(); track.scrollTo({ left: centre(i), behavior: 'smooth' }); } });
     track.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
     upd();
   });

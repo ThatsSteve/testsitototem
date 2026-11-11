@@ -162,7 +162,7 @@
     // Pick the rendering that matches the stage on this screen: 960, 1422 or the refined 2844 for dense displays.
     function size() {
       var need = stage.clientWidth * (window.devicePixelRatio || 1);
-      var lite = !!conn && conn.downlink && conn.downlink < 5;
+      var lite = !!conn && conn.downlink && conn.downlink < 1.5;
       return (slow || need <= 1000) ? 960 : (need <= 1500 || lite) ? 1422 : 2844;
     }
     function url(pi, vi) { return base + paints[pi].s + '-c' + vi + '-' + size() + '.webp'; }
@@ -219,6 +219,17 @@
       if (e.key === 'ArrowLeft') el.scrollBy({ left: -320, behavior: reduced ? 'auto' : 'smooth' });
     });
   });
+
+
+  /* ---------- Chapters and the family: the name comes out once, when about a third of the screen is in view ---------- */
+  var seen = $$('[data-chapter], .family, .motto');
+  if (seen.length) {
+    if (!('IntersectionObserver' in window) || reduced) { seen.forEach(function (e) { e.classList.add('is-in'); }); }
+    else {
+      var cio = new IntersectionObserver(function (es) { es.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('is-in'); cio.unobserve(en.target); } }); }, { threshold: 0.32 });
+      seen.forEach(function (e) { cio.observe(e); });
+    }
+  }
 
   /* ---------- Mobile action bar on model pages ---------- */
   var subnav = $('.subnav'), nameEl = subnav && $('.subnav__name img, .subnav__name .mark--text', subnav);
