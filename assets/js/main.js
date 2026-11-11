@@ -20,10 +20,16 @@
   var header = $('.header');
   var lastY = window.scrollY;
   var subnav = $('.subnav');
+  var heroModel = $('.hero--model');
   function onScrollHeader() {
     var y = window.scrollY;
     if (!header) return;
     header.classList.toggle('is-solid', y > 40 || !!subnav && y > 10);
+    /* model pages: once the section bar is pinned it is the only bar (the header never stacks on top of it) */
+    if (subnav && heroModel && heroModel.getBoundingClientRect().bottom < 90 && !doc.classList.contains('menu-open')) {
+      header.classList.add('is-hidden'); doc.classList.add('subnav-pinned'); lastY = y; return;
+    }
+    doc.classList.remove('subnav-pinned');
     if (!doc.classList.contains('menu-open')) {
       header.classList.toggle('is-hidden', y > lastY && y > 400);
     }

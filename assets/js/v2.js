@@ -222,7 +222,7 @@
 
 
   /* ---------- Chapters and the family: the name comes out once, when about a third of the screen is in view ---------- */
-  var seen = $$('[data-chapter], .family, .motto');
+  var seen = $$('[data-chapter], .family, .motto, [data-draw]');
   if (seen.length) {
     if (!('IntersectionObserver' in window) || reduced) { seen.forEach(function (e) { e.classList.add('is-in'); }); }
     else {
@@ -249,6 +249,22 @@
       ab.classList.toggle('is-on', window.scrollY > window.innerHeight * 0.7 && !nearEnd && !doc.classList.contains('menu-open'));
     });
   }
+
+  /* ---------- Gear knobs: choose one, or let them follow each other while the block is in view ---------- */
+  $$('[data-kv]').forEach(function (kv) {
+    var imgs = $$('.kv__img', kv), btns = $$('.kv__b', kv), cur = 0, timer = null, T = 4000, user = false;
+    kv.style.setProperty('--kv-t', T + 'ms');
+    function show(i) {
+      cur = (i + imgs.length) % imgs.length;
+      imgs.forEach(function (im, j) { im.classList.toggle('is-on', j === cur); });
+      btns.forEach(function (b, j) { b.setAttribute('aria-pressed', j === cur ? 'true' : 'false'); });
+    }
+    function run() { clearInterval(timer); if (user || reduced) return; timer = setInterval(function () { show(cur + 1); }, T); }
+    btns.forEach(function (b, j) { b.addEventListener('click', function () { user = true; kv.classList.add('is-stopped'); clearInterval(timer); show(j); }); });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) { es.forEach(function (en) { if (en.isIntersecting) { show(cur); run(); } else clearInterval(timer); }); }, { threshold: 0.35 }).observe(kv);
+    }
+  });
 
   /* ---------- Back to top ---------- */
   $$('[data-top]').forEach(function (a) {
