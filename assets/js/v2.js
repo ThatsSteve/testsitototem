@@ -156,8 +156,9 @@
   /* ---------- The studio: drag or use the arrows to turn the car, pick a paint to change it ---------- */
   $$('[data-studio]').forEach(function (st) {
     var paints = JSON.parse(st.getAttribute('data-paints')), views = JSON.parse(st.getAttribute('data-views')), base = st.getAttribute('data-base');
-    var stage = $('.studio__stage', st), imgs = $$('.studio__img', st), vb = $$('.studio__views button', st), cb = $$('.studio__chips button', st), nameEl = $('.studio__name b', st);
-    var front = 0, p = 0, v = 1, touched = false, TURN = 4;   // views 0…4 go round the car, 5 looks down on it
+    var stage = $('.studio__stage', st), imgs = $$('.studio__img', st), vb = $$('.studio__dial button', st), cb = $$('.studio__chips button', st), nameEl = $('.studio__paint', st), viewEl = $('.studio__view', st);
+    imgs.forEach(function (im) { im.removeAttribute('loading'); im.loading = 'eager'; });   // a lazy image hidden behind the other one would never load
+    var front = 0, p = 0, v = 1, touched = false, TURN = views.length - 1;   // the walk goes front, quarter, profile, rear quarter, rear, and ends above the car
     vb.forEach(function (b, i) { if (b.getAttribute('aria-pressed') === 'true') v = i; });
     // Pick the rendering that matches the stage on this screen: 960, 1422 or the refined 2844 for dense displays.
     function size() {
@@ -176,9 +177,13 @@
       vb.forEach(function (b, i) { b.setAttribute('aria-pressed', String(i === v)); });
       cb.forEach(function (b, i) { b.setAttribute('aria-pressed', String(i === p)); });
       if (nameEl) nameEl.textContent = paints[p].n;
+      if (viewEl) viewEl.textContent = views[v];
+      st.classList.toggle('is-above', v === views.length - 1);
+      $$('.studio__arrow', st).forEach(function (a) { a.disabled = (+a.getAttribute('data-turn') < 0 ? v === 0 : v === TURN); });
       if (touched && !slow) { warm(p, v - 1); warm(p, v + 1); }
     }
-    function turn(d) { var nv = v > TURN ? (d > 0 ? 0 : TURN) : Math.min(TURN, Math.max(0, v + d)); if (nv !== v) { v = nv; show(); } }
+    function turn(d) { var nv = Math.min(TURN, Math.max(0, v + d)); if (nv !== v) { v = nv; show(); } }
+    $$('.studio__arrow', st).forEach(function (a) { a.addEventListener('click', function (e) { e.stopPropagation(); touched = true; turn(+a.getAttribute('data-turn')); }); a.addEventListener('pointerdown', function (e) { e.stopPropagation(); }); });
     vb.forEach(function (b, i) { b.addEventListener('click', function () { touched = true; if (i !== v) { v = i; show(); } }); });
     cb.forEach(function (b, i) { b.addEventListener('click', function () { touched = true; if (i !== p) { p = i; show(); } }); });
     stage.addEventListener('keydown', function (e) {

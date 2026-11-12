@@ -26,14 +26,14 @@
 <link rel="preload" href="assets/fonts/fraunces-var.woff" as="font" type="font/woff" crossorigin>
 
 <link rel="stylesheet" href="assets/css/main.css?v=3a8a6b0f">
-<link rel="stylesheet" href="assets/css/v2.css?v=4345b439">
+<link rel="stylesheet" href="assets/css/v2.css?v=2f3d4a61">
 <link rel="stylesheet" href="assets/css/print.css?v=84230310" media="print">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Totem Automobili", "legalName": "Totem Automobili Srl", "url": "https://totemautomobili.com/", "foundingDate": "2018", "vatID": "IT04508810274", "address": {"@type": "PostalAddress", "streetAddress": "Via Monte Berico 24", "postalCode": "30020", "addressLocality": "Marcon", "addressRegion": "VE", "addressCountry": "IT"}, "contactPoint": [{"@type": "ContactPoint", "contactType": "sales", "telephone": "+39 346 37 99 155", "email": "info@totemautomobili.com"}, {"@type": "ContactPoint", "contactType": "press", "email": "press@totemautomobili.com"}], "sameAs": ["https://www.instagram.com/totem.automobili", "https://www.facebook.com/totemautomobili", "https://www.youtube.com/channel/UCAaBQFiA9haAtrIjLIbiJ0w"]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Totem Automobili", "item": "index.html"}, {"@type": "ListItem", "position": 2, "name": "Personalisation", "item": "personalisation.html"}]}</script>
 
 <script src="assets/js/config.js?v=31bdd279" defer></script>
 <script src="assets/js/main.js?v=c9d5d210" defer></script>
-<script src="assets/js/v2.js?v=ef7d2419" defer></script>
+<script src="assets/js/v2.js?v=59c02b17" defer></script>
 </head>
 <body class="page-personalisation">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -75,16 +75,18 @@
     <div><p class="p reveal">The colour of a Totem must reflect the spirit of its owner. It may be matched to any sample the client brings to the atelier, or chosen from a catalogue of more than forty shades, from the most historic Italian colours to contemporary tones, in pastel, metallic and mica finishes and in double, triple and quadruple layers of exceptional depth.</p><p class="p reveal mt-s">Turn the car and try a colour. Through the Individual Program, colours are developed together with the client and reserved to a single car.</p></div>
   </div></div>
   <div class="studio__stage" tabindex="0" role="group" aria-label="Totem GT Super in the studio. Use the left and right arrow keys to turn the car.">
-    <img class="studio__img is-on" src="assets/img/studio/blu-francia-c1-1422.webp" srcset="assets/img/studio/blu-francia-c1-960.webp 960w, assets/img/studio/blu-francia-c1-1422.webp 1422w, assets/img/studio/blu-francia-c1-2844.webp 2844w" sizes="(max-width: 900px) 124vw, min(100vw, 1500px)" width="1422" height="800" alt="Totem GT Super in Blu Francia, front quarter" loading="lazy" decoding="async">
+    <img class="studio__img is-on" src="assets/img/studio/blu-francia-c1-1422.webp" srcset="assets/img/studio/blu-francia-c1-960.webp 960w, assets/img/studio/blu-francia-c1-1422.webp 1422w, assets/img/studio/blu-francia-c1-2844.webp 2844w" sizes="(max-width: 900px) 124vw, min(100vw, 1500px)" width="1422" height="800" alt="Totem GT Super in Blu Francia, front quarter" decoding="async">
     <img class="studio__img" alt="" width="1422" height="800" decoding="async">
+    <button type="button" class="studio__arrow studio__arrow--prev" data-turn="-1" aria-label="Turn the car to the left"><i aria-hidden="true"></i></button>
+    <button type="button" class="studio__arrow studio__arrow--next" data-turn="1" aria-label="Turn the car to the right"><i aria-hidden="true"></i></button>
   </div>
   <div class="wrap studio__ctrl">
     <div class="studio__group">
-      <p class="studio__name"><span>Angle</span></p>
-      <div class="studio__views" role="group" aria-label="Viewing angle"><button type="button" aria-pressed="false"><span>Front</span></button><button type="button" aria-pressed="true"><span>Front quarter</span></button><button type="button" aria-pressed="false"><span>Profile</span></button><button type="button" aria-pressed="false"><span>Rear quarter</span></button><button type="button" aria-pressed="false"><span>Rear</span></button><button type="button" aria-pressed="false"><span>Above</span></button></div>
+      <p class="studio__name" aria-live="polite"><span>View</span><b class="studio__view">Front quarter</b></p>
+      <div class="studio__dial" role="group" aria-label="Viewing angle"><button type="button" aria-pressed="false" aria-label="Front"><i aria-hidden="true"></i><span>Front</span></button><button type="button" aria-pressed="true" aria-label="Front quarter"><i aria-hidden="true"></i><span>Front quarter</span></button><button type="button" aria-pressed="false" aria-label="Profile"><i aria-hidden="true"></i><span>Profile</span></button><button type="button" aria-pressed="false" aria-label="Rear quarter"><i aria-hidden="true"></i><span>Rear quarter</span></button><button type="button" aria-pressed="false" aria-label="Rear"><i aria-hidden="true"></i><span>Rear</span></button><button type="button" aria-pressed="false" aria-label="Above"><i aria-hidden="true"></i><span>Above</span></button></div>
     </div>
     <div class="studio__group">
-      <p class="studio__name" aria-live="polite"><span>Paint</span><b>Blu Francia</b></p>
+      <p class="studio__name" aria-live="polite"><span>Paint</span><b class="studio__paint">Blu Francia</b></p>
       <div class="studio__chips" role="group" aria-label="Paint colour"><button type="button" style="--i:0" aria-label="Blu Francia" aria-pressed="true"></button><button type="button" style="--i:1" aria-label="Verde Inglese" aria-pressed="false"></button><button type="button" style="--i:2" aria-label="Rosso Amaranto" aria-pressed="false"></button><button type="button" style="--i:3" aria-label="Grigio Vesuvio" aria-pressed="false"></button><button type="button" style="--i:4" aria-label="Verde Oliva" aria-pressed="false"></button><button type="button" style="--i:5" aria-label="Blu Pervinca" aria-pressed="false"></button><button type="button" style="--i:6" aria-label="Bronze" aria-pressed="false"></button><button type="button" style="--i:7" aria-label="Beige Ponza" aria-pressed="false"></button><button type="button" style="--i:8" aria-label="Viola Atmosfera" aria-pressed="false"></button><button type="button" style="--i:9" aria-label="Verde Antracite" aria-pressed="false"></button><button type="button" style="--i:10" aria-label="Rosa Antico" aria-pressed="false"></button><button type="button" style="--i:11" aria-label="Grigio Milano" aria-pressed="false"></button><button type="button" style="--i:12" aria-label="Beige Cava" aria-pressed="false"></button><button type="button" style="--i:13" aria-label="Nero" aria-pressed="false"></button></div>
     </div>
   </div>
