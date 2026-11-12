@@ -1074,4 +1074,39 @@ button.cc:focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
 }
 @media (max-width: 700px) { .studio__arrow { display: none; } }
 
+/* ===== v11 ===== */
+/* model chapters: the car whole, centred, the same size in every chapter; its name and figures on the black below */
+.chapter--v2 .chapter__stage { display: block; position: relative; min-height: 0 !important; aspect-ratio: 2 / 1; max-height: 86svh; width: 100%; overflow: hidden; }
+.chapter--v2 .chapter__stage > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.chapter--v2 .chapter__stage::after { display: none; }
+.chapter__bar { display: grid; grid-template-columns: minmax(0, 1.2fr) auto auto; gap: 24px clamp(32px, 5vw, 88px); align-items: end; padding-block: clamp(26px, 3vw, 44px) clamp(30px, 3.4vw, 52px); }
+.chapter--v2 .chapter__mark { margin: 0 0 12px; }
+.chapter--v2 .mark--chapter { --cap: clamp(24px, 3vw, 46px); }
+.chapter--v2 .chapter__line { font-size: clamp(17px, 1.5vw, 24px); max-width: none; }
+.chapter--v2 .chapter__specs dd { font-size: clamp(22px, 2.1vw, 34px); }
+.chapter--v2 .btns { flex-wrap: nowrap; }
+.chapter--v2 + .chapter--v2 { margin-top: clamp(48px, 7vw, 120px); }
+@media (max-width: 1100px) { .chapter__bar { grid-template-columns: 1fr auto; } .chapter__bar .chapter__id { grid-column: 1 / -1; } }
+@media (max-width: 760px) {
+  .chapter--v2 .chapter__stage { aspect-ratio: 4 / 3; }
+  .chapter--v2 .chapter__stage > img { position: absolute; height: 100%; min-height: 0; }
+  .chapter__bar { grid-template-columns: 1fr; padding-inline: var(--pad); }
+  .chapter--v2 .btns { flex-wrap: wrap; }
+}
+
+/* the statement under the film */
+.statement__grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(36px, 6vw, 110px); align-items: center; }
+.statement__motto { font-style: italic; font-size: clamp(18px, 1.6vw, 26px); line-height: 1.35; color: #cfcfcf; margin-bottom: clamp(24px, 3vw, 44px); padding-left: 22px; border-left: 1px solid rgba(255, 255, 255, .5); }
+.statement .manifesto__text { max-width: 20ch; }
+.statement__text .p { margin-top: clamp(24px, 3vw, 40px); max-width: 52ch; }
+.statement__text .btns { margin-top: clamp(26px, 3vw, 40px); }
+.statement__media .tile { margin: 0; }
+@media (max-width: 900px) { .statement__grid { grid-template-columns: 1fr; } .statement__media { order: -1; } .statement__media .tile .media { aspect-ratio: 4 / 3 !important; } }
+.statement__grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+.statement .manifesto__text { max-width: none; font-size: clamp(26px, 2.5vw, 40px); line-height: 1.2; }
+@media (max-width: 900px) { .statement__grid { grid-template-columns: 1fr; } .statement__media .tile .media { aspect-ratio: 3 / 2 !important; } }
+.statement__grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+.statement .manifesto__text { font-size: clamp(28px, 2.9vw, 46px); }
+@media (max-width: 900px) { .statement__grid { grid-template-columns: 1fr; } .statement__media .tile .media { aspect-ratio: 4 / 5 !important; } }
+
 
